@@ -1,7 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace PlayerStatistics.Data
 {
     public class PlayerStats
     {
+        public int Id { get; set; }
         public int Kills { get; set; }
         public int Deaths { get; set; }
         public int DamageDealt { get; set; }

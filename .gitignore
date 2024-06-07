@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+src/PlayerStatistics/PlayerStatsDb.db
+src/PlayerStatistics/PlayerStatsDb.db-shm
+src/PlayerStatistics/PlayerStatsDb.db-wal

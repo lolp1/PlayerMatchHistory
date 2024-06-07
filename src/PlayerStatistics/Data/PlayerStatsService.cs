@@ -16,5 +16,12 @@ namespace PlayerStatistics.Data
                 TimePlayed = TimeSpan.FromMinutes(randomizer.Next(60, 120))
             }).ToArray());
         }
+
+        public async Task SeedDatabaseWithMatchHistory(PlayerStatsContext context)
+        {
+            var matches = await GetPlayerMatchHistoryAsync();
+            context.MatchHistory?.AddRange(matches);
+            await context.SaveChangesAsync();
+        }
     }
 }

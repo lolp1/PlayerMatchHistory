@@ -1,6 +1,7 @@
 ﻿@page "/fetchmatchdata"
+@using Microsoft.EntityFrameworkCore
 @using PlayerStatistics.Data
-@inject PlayerStatsService PlayerStatsService
+@inject IDbContextFactory<PlayerStatsContext> DbFactory
 
 <PageTitle>Match History</PageTitle>
 
@@ -49,10 +50,12 @@ else
 }
 
 @code {
-    private PlayerStats[]? playerstats;
+    private IReadOnlyList<PlayerStats>? playerstats;
 
     protected override async Task OnInitializedAsync()
     {
-        playerstats = await PlayerStatsService.GetPlayerMatchHistoryAsync();
+        using var context = DbFactory.CreateDbContext();
+        var query = await Task.FromResult(context.MatchHistory?.AsQueryable());
+        playerstats = query?.ToList();
     }
 }
